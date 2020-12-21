@@ -1,0 +1,297 @@
+<?php include "../inc/dbinfo.inc"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<?php
+
+/* Connect to MySQL and select the database. */
+$connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+$database = mysqli_select_db($connection, DB_DATABASE);
+
+/* Ensure that the Article table exists. */
+VerifyArticleTable($connection, DB_DATABASE); 
+
+/* If input fields are populated, add a row to the Article table. */
+$article_name = htmlentities($_POST['Name']);
+$article_address = htmlentities($_POST['Address']);
+
+if (strlen($article_name) || strlen($article_address)) {
+AddArticle($connection, $article_name, $article_address);
+}
+?>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Cloud Computing Project</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.min.css" rel="stylesheet">
+  <style type="text/css">
+   a:link { color: black; text-decoration: none;}
+   a:visited { color: black; text-decoration: none;}
+   a:hover { color: black; text-decoration: none;}
+
+
+ </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <h1 ><a class="navbar-brand" href="index.php"> LJA Cloud Computing Homepage</a></h1>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="container">
+      <div class="col-xl-9 mx-auto">
+        <h1> Welcome to Cloud Computing Homepage!!</h1>
+        <h2> Cloud Computing Project </h2>
+        <h3> Option 4 - Apache Web Server + RDS 를 이용한 구축</h3>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="features-icons bg-light text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="icon-check m-auto text-primary"></i>
+          </div>
+          <h3> - Add Article - </h3>
+          <p >Add an article about cloud computing!</p>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <form action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
+          <div class="form-row">
+            <div class="col-10 col-md-9 mb-2 mb-md-0">
+              <input type="text" name="Name" class="form-control form-control-lg" placeholder="Name of Article...">
+              <br>
+            </div>
+
+            <div class="col-10 col-md-9 mb-2 mb-md-0">
+              <input type="text" name="Address" class="form-control form-control-lg" placeholder="Url of Article...">
+            </div>
+            <div class="col-10 col-md-3">
+              <button type="submit" class="btn btn-block btn-lg btn-primary">Add!</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="icon-screen-desktop m-auto text-primary"></i>
+          </div>
+          <h3>- 1 Day Report -</h3> 
+          <p> View all reports from 1 to 14 week!</p>
+          <p>If you want to see weekly reports,<br> click 1 day report..</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+
+          <table border=1 width=600 frame="hsides">
+            <tr>
+              <th style="font-size: 20px"> 주차</th>
+              <th style="font-size: 20px"> 강의 주제 </th>
+              <th style="font-size: 20px"> 1 Day Report</th>
+            </tr>
+            <tr>
+              <td> 2</td>
+              <td>클라우드 컴퓨팅 소개 및 서비스</td>
+              <td><i><a href="2.html">2W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 3</td>
+              <td>AWS Computing Service 소개</td>
+              <td><i><a href="3.html">3W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 4</td>
+              <td>AWS Services - Storage, Content Delivery, Others</td>
+              <td><i><a href="4.html">4W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 5</td>
+              <td>AWS - VPC,LAMP Web server, Wordpress Website</td>
+              <td><i><a href="5.html">5W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 6</td>
+              <td>AWS - S3, CloudFront, Load Balancing</td>
+              <td><i><a href="6.html">6W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 7</td>
+              <td>AWS - Auto Scaling</td>
+              <td><i><a href="7.html">7W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 8</td>
+              <td>중간고사 </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td> 9</td>
+              <td>AWS - Elastic Beanstalk, Lambda</td>
+              <td><i><a href="9.html">9W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 10</td>
+              <td>AWS- RDS</td>
+              <td><i><a href="10.html">10W 1 Day Report</a></i></td>
+            </tr>
+            <tr>
+              <td> 11 </td>
+              <td>Azure</td>
+              <td><i><a href="11.html">11W 1 Day Report</a></td>
+              </tr>
+              <tr>
+                <td> 12</td>
+                <td>Azure- Machine Learning</td>
+                <td><i><a href="12.html">12W 1 Day Report</a></i></td>
+              </tr>
+              <tr>
+                <td> 13</td>
+                <td>Azure- SageMaker</td>
+                <td><i><a href="13.html">13W 1 Day Report</a></i></td>
+              </tr>
+              <tr>
+                <td> 14</td>
+                <td>IBM AI Service</td>
+                <td><i><a href="14.html">14W 1 Day Report</a></i></td>
+              </tr>
+            </table>
+            click the 1 Day Report...
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+            <div class="features-icons-icon d-flex">
+              <i class="icon-layers m-auto text-primary"></i>
+            </div>
+            <h3> - All Article - </h3>
+            <p>View all Cloud Computing articles added!</p>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <table border=1 width=600 frame="hsides">
+           <tr>
+            <th style="font-size: 20px"> ID</th>
+            <th style="font-size: 20px"> Ariticle Name </th>
+            <th style="font-size: 20px"> Article Url</th>
+          </tr>
+
+
+          <?php
+
+          $result = mysqli_query($connection, "SELECT * FROM Article"); 
+
+          while($query_data = mysqli_fetch_row($result)) {
+          echo "<tr>";
+            echo "<td>",$query_data[0], "</td>",
+            "<td>",$query_data[1], "</td>",
+            '<td><a href ="',$query_data[2],'">',$query_data[2], "</a></td>";
+          echo "</tr>";
+        }
+        ?>
+      </table>
+      Click the Article Url ...
+    </div>
+  </div>
+</div>
+</div>
+
+</section>
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Clean up. -->
+<?php
+
+mysqli_free_result($result);
+mysqli_close($connection);
+
+?>
+
+</body>
+</html>
+
+<?php
+
+/* Add an Article to the table. */
+function AddArticle($connection, $name, $address) {
+$n = mysqli_real_escape_string($connection, $name);
+$a = mysqli_real_escape_string($connection, $address);
+
+$query = "INSERT INTO `Article` (`Name`, `Address`) VALUES ('$n', '$a');";
+
+if(!mysqli_query($connection, $query)) echo("<p>Error adding employee data.</p>");
+}
+
+/* Check whether the table exists and, if not, create it. */
+function VerifyArticleTable($connection, $dbName) {
+if(!TableExists("Article", $connection, $dbName)) 
+{ 
+ $query = "CREATE TABLE `Article` (
+ `ID` int(11) NOT NULL AUTO_INCREMENT,
+ `Name` varchar(150) DEFAULT NULL,
+ `Address` varchar(90) DEFAULT NULL,
+ PRIMARY KEY (`ID`),
+ UNIQUE KEY `ID_UNIQUE` (`ID`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+
+ if(!mysqli_query($connection, $query)) echo("<p>Error creating table.</p>");
+}
+}
+
+/* Check for the existence of a table. */
+function TableExists($tableName, $connection, $dbName) {
+$t = mysqli_real_escape_string($connection, $tableName);
+$d = mysqli_real_escape_string($connection, $dbName);
+
+$checktable = mysqli_query($connection, 
+"SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME = '$t' AND TABLE_SCHEMA = '$d'");
+
+if(mysqli_num_rows($checktable) > 0) return true;
+
+return false;
+}
+?>
+
+
